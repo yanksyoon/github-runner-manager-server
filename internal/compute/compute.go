@@ -43,11 +43,13 @@ func (m *Manager) prepareNetwork() error {
 	return nil
 }
 
-func (m *Manager) CreateServer(ctx context.Context, name string, image string, flavor string) (*servers.Server, error) {
+func (m *Manager) CreateServer(ctx context.Context, name string, imageID string, flavorID string) (*servers.Server, error) {
+	// TODO: Invalidate image cache if error due to image ref.
+	// Also differentiate different type of create server errors.
 	return servers.Create(ctx, m.computeClient, servers.CreateOpts{
 		Name:             name,
-		ImageRef:         image,
-		FlavorRef:        flavor,
+		ImageRef:         imageID,
+		FlavorRef:        flavorID,
 		SecurityGroups:   []string{m.securityGroupName},
 		UserData:         []byte{},
 		AvailabilityZone: "",

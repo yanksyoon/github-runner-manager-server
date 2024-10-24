@@ -25,6 +25,8 @@ func startWork(queueManager *queue.Manager) {
 	}
 }
 
-func createServer(job *job.Job) {
+func createServer(job *job.Job) error {
+	// validate job (flavor, image) and create server.
 	fmt.Println("Creating server...")
+	return nil
 }
